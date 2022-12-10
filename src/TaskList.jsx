@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import TaskCard from "./TaskCard";
-function TaskList({ task, deleteTask}) {
-  if (task.length === 0) {
+import { TaskContext } from "./context/TaskContext";
+function TaskList() {
+  const {tasks} = useContext(TaskContext)
+  if (tasks.length === 0) {
     return <h1>No hay Tareas aun</h1>;
   }
   
   return (
-    <div>
-      {task.map((data) => {
+    <div className="grid grid-cols-3 gap-2 ">
+      {tasks.map((data) => {
         return (
-          <div key={data.id}>
-            <TaskCard notes={data} deleteTask={deleteTask}></TaskCard>
+          <div key={data.id} >
+            <TaskCard notes={data}></TaskCard>
           </div>
         );
       })}
